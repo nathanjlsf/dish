@@ -1,0 +1,54 @@
+@import './tokens.css';
+
+body {
+  font-family: sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.recipe-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.recipe-card {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--border-color);
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 0.5rem;
+  }
+  nav {
+    flex-direction: column;
+  }
+}
+
+button {
+    border-radius: 10px;
+}
+
+input {
+    border-radius: 10px;
+}
+
+input:focus, button:focus {
+  outline: 2px solid var(--focus-color);
+}

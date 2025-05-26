@@ -1,0 +1,15 @@
+:root {
+  --bg-color: #ede2bb;
+  --text-color: #111111;
+  --card-bg: #f8cda1;
+  --focus-color: #007BFF;
+  --border-color: #ccc;
+}
+
+[data-theme='dark'] {
+  --bg-color: #2b2512;
+  --text-color: #f5f5f5;
+  --card-bg: #a8784a;
+  --focus-color: #90caf9;
+  --border-color: #665544;
+}
