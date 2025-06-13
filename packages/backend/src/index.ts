@@ -1,15 +1,27 @@
-import express, { Request, Response } from "express";
-import dotenv from "dotenv";
+import express from 'express';
+import dotenv from 'dotenv';
+import path from 'path';
+import { connectMongo } from './connectMongo';
+import { registerAuthRoutes } from './routes/authRoutes';
+import { registerImageRoutes } from './routes/imageRoutes';
+import { verifyAuthToken } from './middleware/verifyAuthToken';
 
-dotenv.config(); // Read the .env file in the current working directory, and load values into process.env.
-const PORT = process.env.PORT || 3000;
-
+dotenv.config();
 const app = express();
+const PORT = process.env.PORT || 3000;
+const STATIC_DIR = path.resolve(__dirname, process.env.STATIC_DIR || "public");
 
-app.get("/hello", (req: Request, res: Response) => {
-    res.send("Hello, World");
-});
+app.use(express.json());
+app.use(express.static(STATIC_DIR));
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+const mongoClient = connectMongo();
+mongoClient.connect().then(() => {
+  const db = mongoClient.db();
+
+  registerAuthRoutes(app, db);
+  registerImageRoutes(app, db, verifyAuthToken);
+
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
 });
