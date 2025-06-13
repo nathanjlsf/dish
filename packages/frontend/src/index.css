@@ -17,8 +17,8 @@ nav {
 }
 
 .recipe-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1rem;
 }
@@ -30,6 +30,20 @@ nav {
   text-decoration: none;
   color: inherit;
   border: 1px solid var(--border-color);
+}
+
+.recipe-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.hometabs {
+  font-size: 20px;
+  margin: 10px;
+}
+
+.hometabs:link {
+  text-decoration: none;
 }
 
 @media (max-width: 600px) {

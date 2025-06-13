@@ -29,6 +29,11 @@ function App() {
     localStorage.removeItem('user');
   };
 
+  const [ingredients, setIngredients] = useState<string[]>(() => {
+    const stored = localStorage.getItem("ingredients");
+    return stored ? JSON.parse(stored) : [];
+  });
+
   return (
     <Router>
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} user={user} logout={logout} />
@@ -37,8 +42,8 @@ function App() {
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/register" element={<Register setUser={setUser} />} />
         <Route path="/recipe/:id" element={<RecipeDetail />} />
-        <Route path="/ingredients" element={<Ingredients />} />
-        <Route path="/foryou" element={<ForYou />} />
+        <Route path="/ingredients" element={<Ingredients ingredients={ingredients} setIngredients={setIngredients} />} />
+        <Route path="/foryou" element={<ForYou ingredients={ingredients} />} />
         <Route path="/popular" element={<Popular />} />
       </Routes>
     </Router>
